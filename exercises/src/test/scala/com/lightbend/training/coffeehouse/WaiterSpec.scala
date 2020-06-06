@@ -30,7 +30,7 @@ class WaiterSpec extends BaseAkkaSpec {
     }
     "result in a FrustratedException if maxComplaintCount exceeded" in {
       val waiter = system.actorOf(Waiter.props(system.deadLetters, system.deadLetters, 0))
-      EventFilter[Waiter.FrustratedException.type](occurrences = 1) intercept {
+      EventFilter[Waiter.FrustratedException](occurrences = 1) intercept {
         waiter ! Waiter.Complaint(Coffee.Akkaccino)
       }
     }

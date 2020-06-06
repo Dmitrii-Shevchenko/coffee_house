@@ -1,5 +1,5 @@
 {
-  "start-time" : "2020-06-06T16:18:18.702",
+  "start-time" : "2020-06-06T20:39:30.325",
   "akka-version" : "2.6.3",
   "akka-diagnostics-version" : "1.1.12",
   "classpath" : "/home/shidivr/Documents/LAS-P-lightbend-akka-for-scala-professional-v1/exercises/target/scala-2.13/test-classes/:/home/shidivr/Documents/LAS-P-lightbend-akka-for-scala-professional-v1/exercises/target/scala-2.13/classes/:/home/shidivr/Documents/LAS-P-lightbend-akka-for-scala-professional-v1/common/target/scala-2.13/classes/:/home/shidivr/Documents/LAS-P-lightbend-akka-for-scala-professional-v1/common/target/scala-2.13/test-classes/:/home/shidivr/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.13.1.jar:/home/shidivr/.ivy2/cache/com.typesafe.akka/akka-actor_2.13/jars/akka-actor_2.13-2.6.3.jar:/home/shidivr/.ivy2/cache/com.typesafe/config/bundles/config-1.4.0.jar:/home/shidivr/.ivy2/cache/org.scala-lang.modules/scala-java8-compat_2.13/jars/scala-java8-compat_2.13-0.9.0.jar:/home/shidivr/.ivy2/cache/com.typesafe.akka/akka-slf4j_2.13/jars/akka-slf4j_2.13-2.6.3.jar:/home/shidivr/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.30.jar:/home/shidivr/.ivy2/cache/ch.qos.logback/logback-classic/jars/logback-classic-1.2.3.jar:/home/shidivr/.ivy2/cache/ch.qos.logback/logback-core/jars/logback-core-1.2.3.jar:/home/shidivr/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.13/bundles/scala-parser-combinators_2.13-1.1.2.jar:/home/shidivr/.ivy2/cache/com.lightbend.akka/akka-diagnostics_2.13/jars/akka-diagnostics_2.13-1.1.12.jar:/home/shidivr/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.5.jar:/home/shidivr/.ivy2/cache/com.lightbend.cinnamon/cinnamon-akka_2.13/jars/cinnamon-akka_2.13-2.13.7.jar:/home/shidivr/.ivy2/cache/com.lightbend.cinnamon/cinnamon-java/jars/cinnamon-java-2.13.7.jar:/home/shidivr/.ivy2/cache/com.lightbend.cinnamon/cinnamon-core-java/jars/cinnamon-core-java-2.13.7.jar:/home/shidivr/.ivy2/cache/com.lightbend.cinnamon/cinnamon-common/jars/cinnamon-common-2.13.7.jar:/home/shidivr/.ivy2/cache/com.lightbend.cinnamon/cinnamon-scala_2.13/jars/cinnamon-scala_2.13-2.13.7.jar:/home/shidivr/.ivy2/cache/com.lightbend.cinnamon/cinnamon-core_2.13/jars/cinnamon-core_2.13-2.13.7.jar:/home/shidivr/.ivy2/cache/com.lightbend.cinnamon/cinnamon-jvm-metrics-producer/jars/cinnamon-jvm-metrics-producer-2.13.7.jar:/home/shidivr/.ivy2/cache/com.lightbend.cinnamon/cinnamon-prometheus/jars/cinnamon-prometheus-2.13.7.jar:/home/shidivr/.ivy2/cache/io.prometheus/simpleclient/bundles/simpleclient-0.8.0.jar:/home/shidivr/.ivy2/cache/org.hdrhistogram/HdrHistogram/bundles/HdrHistogram-2.1.12.jar:/home/shidivr/.ivy2/cache/com.lightbend.cinnamon/cinnamon-prometheus-httpserver/jars/cinnamon-prometheus-httpserver-2.13.7.jar:/home/shidivr/.ivy2/cache/io.prometheus/simpleclient_httpserver/bundles/simpleclient_httpserver-0.8.0.jar:/home/shidivr/.ivy2/cache/io.prometheus/simpleclient_common/bundles/simpleclient_common-0.8.0.jar:/home/shidivr/.ivy2/cache/com.typesafe.akka/akka-testkit_2.13/jars/akka-testkit_2.13-2.6.3.jar:/home/shidivr/.ivy2/cache/org.scalatest/scalatest_2.13/bundles/scalatest_2.13-3.1.0.jar:/home/shidivr/.ivy2/cache/org.scalatest/scalatest-compatible/bundles/scalatest-compatible-3.1.0.jar:/home/shidivr/.ivy2/cache/org.scalactic/scalactic_2.13/bundles/scalactic_2.13-3.1.0.jar:/home/shidivr/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.13.1.jar:/home/shidivr/.ivy2/cache/org.scala-lang.modules/scala-xml_2.13/bundles/scala-xml_2.13-1.2.0.jar:/home/shidivr/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/test-agent-1.2.8.jar:/home/shidivr/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/test-interface-1.0.jar:/home/shidivr/.ivy2/cache/com.lightbend.cinnamon/cinnamon-agent/jars/cinnamon-agent-2.13.7.jar",
@@ -7,15 +7,15 @@
   "system-metrics" : {
     "heap-init" : 130023424,
     "heap-max" : 1832910848,
-    "heap-used" : 39188288,
-    "heap-committed" : 266862592,
+    "heap-used" : 40669424,
+    "heap-committed" : 212860928,
     "os-processors" : 2,
     "mem-pool-0" : {
       "name" : "Code Cache",
       "type" : "Non-heap memory",
       "init" : 2555904,
       "max" : 251658240,
-      "used" : 11164800,
+      "used" : 11167744,
       "committed" : 11272192
     },
     "mem-pool-1" : {
@@ -23,7 +23,7 @@
       "type" : "Non-heap memory",
       "init" : 0,
       "max" : -1,
-      "used" : 33418792,
+      "used" : 33394680,
       "committed" : 36610048
     },
     "mem-pool-2" : {
@@ -31,32 +31,32 @@
       "type" : "Non-heap memory",
       "init" : 0,
       "max" : 1073741824,
-      "used" : 4253584,
+      "used" : 4258464,
       "committed" : 4718592
     },
     "mem-pool-3" : {
       "name" : "PS Eden Space",
       "type" : "Heap memory",
       "init" : 32505856,
-      "max" : 655884288,
-      "used" : 19414792,
-      "committed" : 157286400
+      "max" : 656932864,
+      "used" : 16238288,
+      "committed" : 93847552
     },
     "mem-pool-4" : {
       "name" : "PS Survivor Space",
       "type" : "Heap memory",
       "init" : 5242880,
-      "max" : 15728640,
+      "max" : 13107200,
       "used" : 0,
-      "committed" : 15728640
+      "committed" : 13107200
     },
     "mem-pool-5" : {
       "name" : "PS Old Gen",
       "type" : "Heap memory",
       "init" : 87031808,
       "max" : 1374683136,
-      "used" : 19773496,
-      "committed" : 93847552
+      "used" : 24431136,
+      "committed" : 105906176
     }
   },
   "configuration" : {
@@ -252,7 +252,7 @@
             }
         },
         "java" : {
-            "command" : "sbt.ForkMain 39487",
+            "command" : "sbt.ForkMain 40355",
             "launcher" : "SUN_STANDARD"
         },
         "jnu" : {

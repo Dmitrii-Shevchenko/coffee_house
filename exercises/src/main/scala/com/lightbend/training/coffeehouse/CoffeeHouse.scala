@@ -33,6 +33,9 @@ class CoffeeHouse(caffeineLimit: Int) extends Actor with ActorLogging {
     //But if there will be another one exception we use default super.supervisorStrategy.decider
     val decider: SupervisorStrategy.Decider = {
       case Guest.CaffeineException => SupervisorStrategy.Stop
+      case Waiter.FrustratedException(coffee, guest) =>
+        barista.forward(Barista.PrepareCoffee(coffee, guest))
+        SupervisorStrategy.Restart
     }
     OneForOneStrategy()(decider.orElse(super.supervisorStrategy.decider))
   }
