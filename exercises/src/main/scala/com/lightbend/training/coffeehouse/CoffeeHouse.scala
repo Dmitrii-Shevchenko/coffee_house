@@ -11,6 +11,7 @@ import akka.actor.{
   SupervisorStrategy,
   Terminated
 }
+import akka.routing.FromConfig
 
 import scala.concurrent.duration._
 
@@ -72,7 +73,7 @@ class CoffeeHouse(caffeineLimit: Int) extends Actor with ActorLogging {
 
   protected def createBarista(): ActorRef =
     context.actorOf(
-      Barista.props(prepareCoffeeDuration, baristaAccuracy),
+      FromConfig.props(Barista.props(prepareCoffeeDuration, baristaAccuracy)),
       "barista"
     )
   protected def createGuest(favoriteCoffee: Coffee,

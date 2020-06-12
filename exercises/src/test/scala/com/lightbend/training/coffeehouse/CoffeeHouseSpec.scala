@@ -14,7 +14,7 @@ class CoffeeHouseSpec extends BaseAkkaSpec {
   "Creating CoffeeHouse" should {
     "result in logging a status message at debug" in {
       EventFilter.debug(pattern = ".*[Oo]pen.*", occurrences = 1) intercept {
-        system.actorOf(CoffeeHouse.props(Int.MaxValue))
+        system.actorOf(CoffeeHouse.props(Int.MaxValue), "coffee-house")
       }
     }
     "result in creating a child actor with the name 'barista'" in {
@@ -47,9 +47,11 @@ class CoffeeHouseSpec extends BaseAkkaSpec {
       val coffeeHouse =
         TestActorRef(new CoffeeHouse(Int.MaxValue) {
           override def createBarista() = barista.ref
-        })
-      coffeeHouse ! CoffeeHouse.ApproveCoffee(Coffee.Akkaccino, system.deadLetters)
-      barista.expectMsg(Barista.PrepareCoffee(Coffee.Akkaccino, system.deadLetters))
+        }, "prepare-coffee")
+      coffeeHouse ! CoffeeHouse.CreateGuest(Coffee.Akkaccino, Int.MaxValue)
+      val guest = TestProbe().expectActor("/user/prepare-coffee/$*")
+      coffeeHouse ! CoffeeHouse.ApproveCoffee(Coffee.Akkaccino, guest)
+      barista.expectMsg(Barista.PrepareCoffee(Coffee.Akkaccino, guest))
     }
     "result in Barista sending a CoffeePrepared to Waiter if caffeineLimit not yet reached" in {
       val dummyGuest = TestProbe().ref // Just there to get an ActorRef...
@@ -72,7 +74,7 @@ class CoffeeHouseSpec extends BaseAkkaSpec {
       }
     }
     "result in logging a status message at info if caffeineLimit reached" in {
-      val coffeeHouse = system.actorOf(CoffeeHouse.props(0))
+      val coffeeHouse = system.actorOf(CoffeeHouse.props(0), "caffeine-limit")
       EventFilter.info(source = coffeeHouse.path.toString, pattern = ".*[Ss]orry.*", occurrences = 1) intercept {
         val guest = TestProbe().ref
         coffeeHouse ! CoffeeHouse.ApproveCoffee(Coffee.Akkaccino, guest)
@@ -82,35 +84,13 @@ class CoffeeHouseSpec extends BaseAkkaSpec {
       val probe = TestProbe()
       val guest = TestProbe().ref
       probe.watch(guest)
-      val coffeeHouse = system.actorOf(CoffeeHouse.props(0))
+      val coffeeHouse = system.actorOf(CoffeeHouse.props(0), "guest-terminated")
       coffeeHouse ! CoffeeHouse.ApproveCoffee(Coffee.Akkaccino, guest)
       probe.expectTerminated(guest)
     }
   }
 
   "On termination of Guest, CoffeeHouse" should {
-    "remove the guest from the guest book" in {
-      val barista = TestProbe()
-      val coffeeHouse =
-        TestActorRef(new CoffeeHouse(Int.MaxValue) {
-          override def createBarista() = barista.ref
-        })
-      coffeeHouse ! CoffeeHouse.CreateGuest(Coffee.Akkaccino, Int.MaxValue)
-      val guest = barista.expectMsgPF() {
-        case Barista.PrepareCoffee(Coffee.Akkaccino, guest) => guest
-      }
-      barista.watch(guest)
-      system.stop(guest)
-      barista.expectTerminated(guest)
-      barista.within(2 seconds) {
-        barista.awaitAssert {
-          coffeeHouse ! CoffeeHouse.ApproveCoffee(Coffee.Akkaccino, guest)
-          barista.expectMsgPF(100 milliseconds) {
-            case Barista.PrepareCoffee(Coffee.Akkaccino, `guest`) => ()
-          }
-        }
-      }
-    }
     "result in logging a thanks message at info" in {
       val coffeeHouse = system.actorOf(CoffeeHouse.props(1), "thanks-coffee-house")
       EventFilter.info(source = coffeeHouse.path.toString, pattern = ".*for being our guest.*", occurrences = 1) intercept {
@@ -123,18 +103,13 @@ class CoffeeHouseSpec extends BaseAkkaSpec {
 
   "On failure of Guest CoffeeHouse" should {
     "stop it" in {
-      val barista = TestProbe()
-      val coffeeHouse =
-        TestActorRef(new CoffeeHouse(Int.MaxValue) {
-          override def createBarista() = barista.ref
-        })
+      val probe = TestProbe()
+      val coffeeHouse = system.actorOf(CoffeeHouse.props(1), "guest-stopped")
       coffeeHouse ! CoffeeHouse.CreateGuest(Coffee.Akkaccino, 0)
-      val guest = barista.expectMsgPF() {
-        case Barista.PrepareCoffee(Coffee.Akkaccino, guest) => guest
-      }
-      barista.watch(guest)
-      guest ! Waiter.CoffeeServed(Coffee.Akkaccino)
-      barista.expectTerminated(guest)
+      val guest = TestProbe().expectActor("/user/guest-stopped/$*")
+      probe.watch(guest)
+      coffeeHouse ! CoffeeHouse.ApproveCoffee(Coffee.Akkaccino, guest)
+      probe.expectTerminated(guest)
     }
   }
 
